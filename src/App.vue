@@ -1,59 +1,24 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app>
-      <!-- 유저정보(로그인), divider, 게시판 링크들 -->
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            <router-link to="/">Home</router-link>
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
+  <v-app id="App">
+    <!-- 최상단 v-app-bar -->
+    <AppBar></AppBar>
 
-      <v-sheet class="pa-4">
-        <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
-        <router-link to="/login"> 로그인 </router-link>
-      </v-sheet>
-
-      <!-- 게시판 이동 -->
-
-      <v-list dense nav>
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>Application</v-toolbar-title>
-    </v-app-bar>
-
-    <!--main contents  -->
-    <v-main>
-      <router-view></router-view>
+    <!-- main -->
+    <v-main class="grey lighten-3">
+      <v-container>
+        <v-sheet min-height="70vh" rounded="lg">
+          <router-view />
+        </v-sheet>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import AppBar from "@/components/AppBar.vue";
+
 export default {
-  data() {
-    return {
-      drawer: null,
-      items: [
-        { title: "Dashboard", icon: "mdi-view-dashboard" },
-        { title: "Photos", icon: "mdi-image" },
-        { title: "About", icon: "mdi-help-box" },
-      ],
-    };
-  },
+  name: "App",
+  components: { AppBar },
 };
 </script>
