@@ -4,13 +4,18 @@
     <AppBar></AppBar>
 
     <!-- main -->
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-sheet min-height="70vh" rounded="lg">
-          <router-view />
-        </v-sheet>
+    <v-main>
+      <v-container fluid>
+        <router-view></router-view>
       </v-container>
     </v-main>
+
+    <!-- footer -->
+    <v-footer padless>
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      </v-col>
+    </v-footer>
   </v-app>
 </template>
 

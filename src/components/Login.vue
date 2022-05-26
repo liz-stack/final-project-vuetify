@@ -1,32 +1,45 @@
 <template>
-  <v-card max-width="50%">
-    <v-form>
-      <v-card-title>
-        <span class="title">로그인</span>
-      </v-card-title>
-      <v-card-text>
-        <v-text-field v-model="userId" label="id"> </v-text-field>
-        <v-text-field v-model="userPw" type="password" label="password">
-        </v-text-field>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn @click="loginSubmit">로그인</v-btn>
-      </v-card-actions>
-    </v-form>
-  </v-card>
+  <v-container>
+    <v-row justify="center">
+      <v-col>
+        <v-card max-width="50%" justify="center">
+          <v-form>
+            <v-card-title>
+              <span class="title">로그인</span>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field v-model="userId" label="id"> </v-text-field>
+              <v-text-field v-model="userPw" type="password" label="password">
+              </v-text-field>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn @click="loginSubmit">로그인</v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
 <script>
+import AuthService from "@/service/AuthService";
 export default {
   name: "Login",
   data() {
     return {
-      userId: null,
-      userPw: null,
+      userId: "",
+      userPw: "",
     };
   },
   methods: {
-    loginSubmit() {
-      console.log("submitted");
+    async loginSubmit() {
+      const response = await AuthService.login({
+        userId: this.userId,
+        userName: this.userName,
+      });
+
+      localStroage.setItem("token", response.data.token);
     },
   },
 };
