@@ -1,18 +1,34 @@
 <template>
-  <h3>home</h3>
+  <v-container>
+    <h3>Hello</h3>
+  </v-container>
 </template>
 
+
 <script>
-import axios from "axios";
+import UserService from "../service/UserService";
 
 export default {
   name: "Home",
-  async created() {
-    const response = await axios.get("user");
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("token");
-    }
-    consloe.log(response);
+  data() {
+    return {
+      content: "",
+    };
+  },
+  mounted() {
+    UserService.getAll().then(
+      (response) => {
+        this.content = response.data;
+      },
+      (error) => {
+        this.content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
 };
 </script>

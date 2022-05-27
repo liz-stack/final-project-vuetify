@@ -4,7 +4,8 @@ const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
     ? { status: { loggedIn: true }, user }
     : { status: { loggedIn: false }, user: null };
-const auth = {
+
+export const auth = {
     namespaced: true,
     state: initialState,
     actions: {
@@ -32,5 +33,3 @@ const auth = {
         }
     }
 }
-
-export default auth;

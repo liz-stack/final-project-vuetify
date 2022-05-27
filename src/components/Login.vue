@@ -8,8 +8,12 @@
               <span class="title">로그인</span>
             </v-card-title>
             <v-card-text>
-              <v-text-field v-model="userId" label="id"> </v-text-field>
-              <v-text-field v-model="userPw" type="password" label="password">
+              <v-text-field v-model="user.userId" label="id"> </v-text-field>
+              <v-text-field
+                v-model="user.userPw"
+                type="password"
+                label="password"
+              >
               </v-text-field>
             </v-card-text>
             <v-card-actions>
@@ -26,12 +30,22 @@
 import AuthService from "@/service/AuthService";
 export default {
   name: "Login",
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+  },
   data() {
     return {
-      userId: "",
-      userPw: "",
+      user: new User("", ""),
+      loading: false,
     };
   },
+  /*  mounted: {
+    if(loggedIn) {
+      this.$router.push("/");
+    },
+  }, */
   methods: {
     async loginSubmit() {
       const response = await AuthService.login({
