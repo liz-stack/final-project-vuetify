@@ -37,7 +37,10 @@ export default {
   },
   data() {
     return {
-      user: new User("", ""),
+      user: {
+        userId: "",
+        userPw: "",
+      },
       loading: false,
     };
   },
@@ -49,8 +52,8 @@ export default {
   methods: {
     async loginSubmit() {
       const response = await AuthService.login({
-        userId: this.userId,
-        userName: this.userName,
+        user.userId = this.user.userId,
+
       });
 
       localStroage.setItem("token", response.data.token);
